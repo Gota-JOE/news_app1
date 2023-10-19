@@ -10,52 +10,69 @@ class NewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.indigo,
-        toolbarHeight: 90,
-        title: Text('Exact News', textDirection: TextDirection.values.first),
-        bottom: TabBar(
-          //controller: TabController(length: tabs.length, ),
+    return DefaultTabController(
+      length: tabs.length,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.indigo,
+          toolbarHeight: 90,
+          title: Text('Exact News', textDirection: TextDirection.values.first),
+          bottom: TabBar(
+            //controller: newsController.tabController,
             //indicatorColor: Colors.indigo,
             dividerColor: Colors.indigoAccent,
             isScrollable: true,
-            tabs: tabs.map((category) {
+            tabs: tabs.map((tabs) {
               return Container(
                   width: 100,
                   //height: ,
                   child: Tab(
-                    text: category,
+                    text: tabs,
                   ));
-            }).toList()),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          TabBarView(children: [
-            Obx(
-              () => newsController.isLoading.value
-                  ? Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      itemCount: newsController.newsList.length,
-                      itemBuilder: (context, index) {
-                        final news = newsController.newsList[index];
-                        return ListTile(
-                          title: Text(news.title),
-                          subtitle: Text(news.description),
-                        );
-                      },
+            }).toList(),
+            /*onTap: (int index) {
+              ser.selectedCategory.value = tabs[index];
+              ser.fetchNews(ser.selectedCategory.value);
+            },*/
+          ),
+        ),
+        body: Column(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: TabBarView(
+                //controller: newsController.tabController,
+                //physics: ScrollPhysics(),
+                  children: [
+                    Obx(
+                          () =>
+                      newsController.isLoading.value
+                          ? Center(child: CircularProgressIndicator())
+                          : Container(
+                            child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: newsController.newsList.length,  //newsController.newsList.length
+                        itemBuilder: (context, index) {
+                            final news = newsController.newsList[index];
+                            return ListTile(
+                              title: Text(news.title),
+                              subtitle: Text(news.description),
+                            );
+                        },
+                      ),
+                          ),
                     ),
+                  ]),
             ),
-          ]),
-          /*TextButton(
-              onPressed: () {
-                ser.fetchNews();
-              },
-              child: Text('data'),
-            )*/
-        ],
+            /*TextButton(
+                onPressed: () {
+                  ser.fetchNews();
+                },
+                child: Text('data'),
+              )*/
+          ],
+        ),
       ),
     );
   }

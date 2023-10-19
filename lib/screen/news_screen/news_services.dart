@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 
 class ApiService extends GetxService {
   //static String countrys = 'eg';
-  //static String category = 'health';
+  final selectedCategory = 'business'.obs;
+
   static final apiKey = 'ff07382cc1f84dc4870f8ed0d3def8b7';
   final url = 'https://newsapi.org/v2/top-headlines?country=eg&apiKey=$apiKey';
 

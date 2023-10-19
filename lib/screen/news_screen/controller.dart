@@ -5,7 +5,8 @@ import '../../data.dart';
 import '../../model/news_model.dart';
 import 'news_services.dart';
 
-class NewsController extends GetxController {
+class NewsController extends GetxController with GetSingleTickerProviderStateMixin{
+  //late TabController tabController;
   final ApiService _apiService = Get.find();
   final newsList = <NewsModel>[].obs;
   final isLoading = false.obs;
@@ -13,6 +14,7 @@ class NewsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    //tabController = TabController(length: 7, vsync: this);
     fetchNews();
   }
 
