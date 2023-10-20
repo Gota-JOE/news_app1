@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-class ApiService extends GetxService {
+/*class ApiService extends GetxService {
   //static String countrys = 'eg';
   final selectedCategory = 'business'.obs;
 
@@ -31,4 +31,4 @@ class ApiService extends GetxService {
           'Failed to fetch news. Status code: ${response.statusCode}');
     }
   }
-}
+}*/

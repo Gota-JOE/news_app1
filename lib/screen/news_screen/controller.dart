@@ -1,11 +1,8 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
-import '../../data.dart';
-import '../../model/news_model.dart';
-import 'news_services.dart';
-
-class NewsController extends GetxController with GetSingleTickerProviderStateMixin{
+/*class NewsController extends GetxController with GetSingleTickerProviderStateMixin{
   //late TabController tabController;
   final ApiService _apiService = Get.find();
   final newsList = <NewsModel>[].obs;
@@ -30,4 +27,29 @@ class NewsController extends GetxController with GetSingleTickerProviderStateMix
     }
   }
 
+}*/
+
+
+class NewsController2 extends GetxController {
+  var newsData = [].obs;
+  final isLoading = false.obs;
+  final apiKey = 'ff07382cc1f84dc4870f8ed0d3def8b7';
+
+  void fetchNewsData(String category) async {
+    try {
+      isLoading.value = true;
+      var url =
+          'https://newsapi.org/v2/top-headlines?country=eg&category=$category&apiKey=$apiKey';
+      var response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        var jsonData = jsonDecode(response.body);
+        newsData.value = jsonData['articles'];
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
+      }
+    } catch (e) {
+      print(e);
+    }
+    isLoading.value = false;
+  }
 }

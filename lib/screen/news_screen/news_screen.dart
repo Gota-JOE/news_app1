@@ -4,9 +4,10 @@ import '../../data.dart';
 import 'controller.dart';
 import 'news_services.dart';
 
-class NewsScreen extends StatelessWidget {
+/*class NewsScreen extends StatelessWidget {
   final ser = ApiService();
   final NewsController newsController = Get.put(NewsController());
+  late TabController tabController;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class NewsScreen extends StatelessWidget {
           toolbarHeight: 90,
           title: Text('Exact News', textDirection: TextDirection.values.first),
           bottom: TabBar(
+            labelStyle: TextStyle(letterSpacing: 1),
             //controller: newsController.tabController,
             //indicatorColor: Colors.indigo,
             dividerColor: Colors.indigoAccent,
@@ -42,26 +44,26 @@ class NewsScreen extends StatelessWidget {
           children: [
             Expanded(
               child: TabBarView(
-                //controller: newsController.tabController,
-                //physics: ScrollPhysics(),
+                  //controller: newsController.tabController,
+                  //physics: ScrollPhysics(),
                   children: [
                     Obx(
-                          () =>
-                      newsController.isLoading.value
+                      () => newsController.isLoading.value
                           ? Center(child: CircularProgressIndicator())
                           : Container(
-                            child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: newsController.newsList.length,  //newsController.newsList.length
-                        itemBuilder: (context, index) {
-                            final news = newsController.newsList[index];
-                            return ListTile(
-                              title: Text(news.title),
-                              subtitle: Text(news.description),
-                            );
-                        },
-                      ),
-                          ),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: newsController.newsList.length,
+                                //newsController.newsList.length
+                                itemBuilder: (context, index) {
+                                  final news = newsController.newsList[index];
+                                  return ListTile(
+                                    title: Text(news.title),
+                                    subtitle: Text(news.description),
+                                  );
+                                },
+                              ),
+                            ),
                     ),
                   ]),
             ),
@@ -76,4 +78,4 @@ class NewsScreen extends StatelessWidget {
       ),
     );
   }
-}
+}*/
